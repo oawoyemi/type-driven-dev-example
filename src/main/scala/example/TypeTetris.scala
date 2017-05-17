@@ -4,7 +4,7 @@ object TypeTetris {
   sealed trait Request //agebraic data type
 
   object Request {
-    final case class Unauthorized() extends Request
+    final case class Unauthorized(secret: String) extends Request
     final case class Authorized() extends Request
   }
 
@@ -21,7 +21,8 @@ object TypeTetris {
       .getOrElse(Future.successful(Response.Unauthorized()))
   }
 
-  def authorize(request: Request.Unauthorized): Option[Request.Authorized] = ???
+  def authorize(request: Request.Unauthorized): Option[Request.Authorized] =
+    if (request.secret == "secret") Some(Request.Authorized()) else None
 
   def doWork(request: Request.Authorized): Future[Response] = ???
 }
