@@ -13,7 +13,7 @@ object TypeTetris {
 
   def service(request: Request.Unauthorized): Future[Response] = {
     val authorized = authorize(request)
-    ???
+    authorized.map(r ⇒ ???).getOrElse(???)
   }
 
   def authorize(request: Request.Unauthorized): Option[Request.Authorized] = ???
