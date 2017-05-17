@@ -5,5 +5,8 @@ object TypeTetris {
   type Request
   type Response
 
-  def service(request: Request): Future[Response] = ???
+  def service(request: Request): Future[Response] =
+    (authorize _ andThen ???)(request)
+
+  def authorize(request: Request): Request = ???
 }
