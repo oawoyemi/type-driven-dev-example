@@ -1,19 +1,22 @@
+package example
+
+import scala.concurrent.Future
+
 object TypeTetris {
-  import scala.concurrent.Future
 
   sealed trait Request //agebraic data type
 
   object Request {
-    final case class Unauthorized(secret: String) extends Request
-    final case class Authorized() extends Request
+    case class Unauthorized(secret: String) extends Request
+    case class Authorized() extends Request
   }
 
   sealed trait Response
 
   object Response {
-    final case class Unauthorized() extends Response
-    final case class Authorized() extends Response
-    final case class Success(body: String) extends Response
+    case class Unauthorized() extends Response
+    case class Authorized() extends Response
+    case class Success(body: String) extends Response
   }
 
   def service(request: Request.Unauthorized): Future[Response] = {
