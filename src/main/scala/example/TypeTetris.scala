@@ -12,6 +12,8 @@ object TypeTetris {
 
   object Response {
     final case class Unauthorized() extends Response
+    final case class Authorized() extends Response
+    final case class Success(body: String) extends Response
   }
 
   def service(request: Request.Unauthorized): Future[Response] = {
@@ -24,5 +26,6 @@ object TypeTetris {
   def authorize(request: Request.Unauthorized): Option[Request.Authorized] =
     if (request.secret == "secret") Some(Request.Authorized()) else None
 
-  def doWork(request: Request.Authorized): Future[Response] = ???
+  def doWork(request: Request.Authorized): Future[Response] =
+    Future.successful(Response.Success(body = "well done"))
 }
